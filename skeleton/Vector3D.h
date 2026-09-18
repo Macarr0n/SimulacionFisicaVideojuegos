@@ -56,8 +56,8 @@ public:
 		return Vector3D(x, y, z);
 	}
 
-	Vector3D operator physx::PxVec3() const {
-
+	operator physx::PxVec3() const {
+		return physx::PxVec3(x, y, z);
 	}
 };
 
