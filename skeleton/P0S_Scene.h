@@ -25,12 +25,6 @@ public:
         m_vTr = physx::PxTransform(v.normalize() * 5.f);
         m_wTr = physx::PxTransform(w.normalize() * 5.f);
 
-        //m_centroEscena = new RenderItem(shape, &m_centroTr, Vector4(1.0f, 1.0f, 1.0f, 1.0f));
-        //m_vecU = new RenderItem(shape, &m_uTr, Vector4(1.0f, 0.0f, 0.0f, 1.0f));
-        //m_vecV = new RenderItem(shape, &m_vTr, Vector4(0.0f, 1.0f, 0.0f, 1.0f));
-        //m_vecW = new RenderItem(shape, &m_wTr, Vector4(0.0f, 0.0f, 1.0f, 1.0f));
-
-
         // Reto B
         D = Vector3D(0.f, 0.f, 1.f);
         P_1 = physx::PxTransform(Vector3D(2.f, 0.f, 3.f));
@@ -50,12 +44,6 @@ public:
                 return Vector4(1.f, 1.f, 0.f, 1.f);
             }
             };
-
-        //m_P1Esfera = new RenderItem(shape, &P_1, colorFromDot(D.dot(P_1.p)));
-        //m_P2Esfera = new RenderItem(shape, &P_2, colorFromDot(D.dot(P_2.p)));
-        //m_P3Esfera = new RenderItem(shape, &P_3, colorFromDot(D.dot(P_3.p)));
-        //m_P4Esfera = new RenderItem(shape, &P_4, colorFromDot(D.dot(P_4.p)));
-
 
         // Reto C
         Vector3D vecA(-8.f, 1.f, -8.f);

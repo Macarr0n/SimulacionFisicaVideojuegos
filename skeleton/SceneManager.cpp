@@ -1,5 +1,6 @@
 #include "SceneManager.h"
 #include <iostream>
+#include "P0S_Scene.h"
 
 // Solicita el cambio de escena. Si el nombre no está registrado, se escribe
 // un error en stderr y la solicitud se ignora.
@@ -53,7 +54,7 @@ void SceneManager::keyPress(unsigned char key, const physx::PxTransform& cameraT
     }
 
     if (key == '0') {
-        changeScene("P0_Scene");
+        changeScene("EscenaP0");
         return; // Consumimos el evento para que no interfiera con la escena
     }
 
