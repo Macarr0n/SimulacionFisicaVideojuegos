@@ -34,25 +34,25 @@ public:
 		x = other.x;
 		y = other.y;
 		z = other.z;
-		return Vector3D(x, y, z);
+		return *this;
 	}
 
-	Vector3D& operator+ (const Vector3D& other) {
+	Vector3D& operator+ (const Vector3D& other) const {
 		return Vector3D(x + other.x, y + other.y, z + other.z);
 	}
 
-	Vector3D& operator- (const Vector3D& other) {
+	Vector3D& operator- (const Vector3D& other) const {
 		return Vector3D(x - other.x, y - other.y, z - other.z);
 	}
 
-	Vector3D& operator* (float op) {
+	Vector3D& operator* (float op) const {
 		return Vector3D(x * op, y * op, z * op);
 	}
 
 	Vector3D& operator+= (const Vector3D& other) {
-		x = x + other.x;
-		y = y + other.y;
-		z = z + other.z;
+		x += other.x;
+		y += other.y;
+		z += other.z;
 		return Vector3D(x, y, z);
 	}
 
