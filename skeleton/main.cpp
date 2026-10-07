@@ -23,6 +23,7 @@
 #include "SceneManager.h"
 #include "P0S_Scene.h"
 #include "P1S_Scene.h"
+#include "P1.2_Scene.h"
 
 #include "EmptyScene.h"
 
@@ -103,6 +104,7 @@ void initPhysics(bool interactive)
 	SceneManager::instance().registerScene<EmptyScene>("EscenaVacia");
 	SceneManager::instance().registerScene<P0_Scene>("EscenaP0");
 	SceneManager::instance().registerScene<P1_Scene>("EscenaP1");
+	SceneManager::instance().registerScene<P1_2_Scene>("EscenaP1.2");
 
 	// Cargar la escena inicial
 	SceneManager::instance().changeScene("EscenaVacia");

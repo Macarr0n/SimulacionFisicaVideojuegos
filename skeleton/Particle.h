@@ -11,7 +11,7 @@ enum class Integrador {
 class Particle
 {
 public:
-	Particle(Vector3D Pos, Vector3D Vel, Vector3D acelleration, float Damping, Integrador Tipo = Integrador::EULER);
+	Particle(Vector3D Pos, Vector3D Vel, Vector3D acelleration, float Damping, Integrador Tipo = Integrador::EULER, float MASA = 1.0f);
 	~Particle();
 
 	void integrate(double t);
@@ -23,5 +23,6 @@ private:
 	Vector3D ace;
 	float damping; // Factor de amortiguamiento para simular fricción o resistencia del aire
 	Integrador tipo;
+	float masa;
 };
 

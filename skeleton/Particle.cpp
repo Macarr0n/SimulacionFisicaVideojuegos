@@ -1,12 +1,13 @@
 #include "Particle.h"
 #include <cmath>
 
-Particle::Particle(Vector3D Pos, Vector3D Vel, Vector3D acelleration, float Damping, Integrador Tipo) {
+Particle::Particle(Vector3D Pos, Vector3D Vel, Vector3D acelleration, float Damping, Integrador Tipo, float Masa) {
 	pose = physx::PxTransform(Pos);
 	vel = Vel;
 	ace = acelleration;
 	damping = Damping;
 	tipo = Tipo;
+	masa = Masa;
 
 	physx::PxShape* shape = CreateShape(physx::PxSphereGeometry(1.0f));
 	renderItem = new RenderItem(shape, &pose, Vector4(1.f, 0.f, 0.f, 1.f));

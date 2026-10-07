@@ -18,7 +18,6 @@ public:
     }
 
     void update(double dt) override {
-        // Lógica/Integración del alumno (por ejemplo, movimiento simple)
         if (m_particle) {
             m_particle->integrate(dt);
         }
