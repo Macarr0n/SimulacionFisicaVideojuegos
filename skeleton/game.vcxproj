@@ -277,10 +277,15 @@
     <ClInclude Include="callbacks.hpp" />
     <ClInclude Include="core.hpp" />
     <ClInclude Include="EmptyScene.h" />
+    <ClInclude Include="GeneradorGauss.h" />
     <ClInclude Include="P0S_Scene.h" />
     <ClInclude Include="P1.2_Scene.h" />
     <ClInclude Include="P1S_Scene.h" />
+    <ClInclude Include="P2_Scene.h" />
     <ClInclude Include="Particle.h" />
+    <ClInclude Include="ParticleGenerator.h" />
+    <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="UniformGenerator.h" />
     <ClInclude Include="Proyectil.h" />
     <ClInclude Include="RenderUtils.hpp" />
     <ClInclude Include="Render\Camera.h" />

@@ -3,7 +3,8 @@
 #include "Scene.h"
 #include "RenderUtils.hpp"
 
-enum class Integrador {
+// cómo se mueve la partícula en cada frame
+enum class Integrator {
 	EULER,
 	EULER_SEMI
 };
@@ -11,18 +12,21 @@ enum class Integrador {
 class Particle
 {
 public:
-	Particle(Vector3D Pos, Vector3D Vel, Vector3D acelleration, float Damping, Integrador Tipo = Integrador::EULER, float MASA = 1.0f);
+	Particle(Vector3D Pos, Vector3D Vel, Vector3D Acc, float Damping, Integrator Type = Integrator::EULER,
+		float Mass = 1.0f, Vector4 Color = Vector4(1.0f, 1.0f, 1.0f, 1.0f), float Radius = 1.0f, double LifeTime = 5.0);
 	~Particle();
 
 	void integrate(double t);
+	physx::PxVec3 getPos() const { return pose.p; }
+	bool isAlive() const { return lifeTime > 0.0; }
 
 private:
 	Vector3D vel;
-	physx::PxTransform pose;
+	physx::PxTransform pose;   // el render item lee la posición de aquí
 	RenderItem* renderItem;
-	Vector3D ace;
-	float damping; // Factor de amortiguamiento para simular fricción o resistencia del aire
-	Integrador tipo;
-	float masa;
+	Vector3D acc;
+	float damping;             // entre 0 y 1, la va frenando como el rozamiento del aire
+	Integrator type;
+	float mass;
+	double lifeTime;           // segundos que le quedan antes de morir
 };
-

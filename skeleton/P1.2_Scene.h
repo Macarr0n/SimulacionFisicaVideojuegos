@@ -71,6 +71,6 @@ private:
 		Vector3D vel = cam->getDir() * tipo.velSim;		    // Velocidad inicial de la flecha
 		Vector3D ace(0.f, -tipo.gravedadSim(), 0.f);	    // Gravedad simulada hacia abajo
 		
-		m_proyectiles.push_back(new Particle(pos, vel, ace, 0.99f, Integrador::EULER_SEMI, tipo.masaSim()));
+		m_proyectiles.push_back(new Particle(pos, vel, ace, 0.99f, Integrator::EULER_SEMI, tipo.masaSim()));
 	}
 };

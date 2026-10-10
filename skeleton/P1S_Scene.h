@@ -14,7 +14,7 @@ public:
     explicit P1_Scene(std::string name) : Scene(std::move(name)) {}
 
     void init() override {
-		m_particle = new Particle(Vector3D(0.f, 0.f, 0.f), Vector3D(10.f, 10.f, 0.f), Vector3D(0.f, -9.8f, 0.f), 0.5f, Integrador::EULER_SEMI);
+		m_particle = new Particle(Vector3D(0.f, 0.f, 0.f), Vector3D(10.f, 10.f, 0.f), Vector3D(0.f, -9.8f, 0.f), 0.5f, Integrator::EULER_SEMI);
     }
 
     void update(double dt) override {
