@@ -277,11 +277,15 @@
     <ClInclude Include="callbacks.hpp" />
     <ClInclude Include="core.hpp" />
     <ClInclude Include="EmptyScene.h" />
+    <ClInclude Include="ForceGenerator.h" />
     <ClInclude Include="GeneradorGauss.h" />
+    <ClInclude Include="GravityForceGenerator.h" />
     <ClInclude Include="P0S_Scene.h" />
     <ClInclude Include="P1.2_Scene.h" />
     <ClInclude Include="P1S_Scene.h" />
     <ClInclude Include="P2_Scene.h" />
+    <ClInclude Include="P3_2_Scene.h" />
+    <ClInclude Include="P3_Scene.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleGenerator.h" />
     <ClInclude Include="ParticleSystem.h" />
@@ -293,6 +297,8 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Vector3D.h" />
+    <ClInclude Include="WhirlwindForceGenerator.h" />
+    <ClInclude Include="WindForceGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -24,6 +24,9 @@ void Particle::integrate(double t) {
 	float dt = static_cast<float>(t);
 	lifeTime -= t;
 
+	// a = F/m (Newton), más la aceleración fija que ya tuviera
+	Vector3D totalAcc = acc + force * (1.0f / mass);
+
 	switch (type) {
 	case Integrator::EULER:
 		// primero la posición, con la velocidad vieja
@@ -32,11 +35,14 @@ void Particle::integrate(double t) {
 		break;
 	case Integrator::EULER_SEMI:
 		// primero la velocidad, así la posición usa la nueva
-		vel += acc * dt;
+		vel += totalAcc * dt;
 		pose.p += vel * dt;
 		break;
 	}
 
 	// damping^dt para que frene lo mismo vaya a los fps que vaya
 	vel = vel * pow(damping, dt);
+
+	// las fuerzas se vuelven a calcular cada frame, así que se vacían
+	force = Vector3D();
 }

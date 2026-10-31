@@ -1,5 +1,7 @@
 #pragma once
 #include "ParticleGenerator.h"
+#include "ForceGenerator.h"
+
 #include <list>
 #include <vector>
 
@@ -14,10 +16,15 @@ public:
 	~ParticleSystem() {
 		for (Particle* p : m_particles) delete p;
 		for (ParticleGenerator* g : m_generators) delete g;
+		for (ForceGenerator* f : m_forceGenerators) delete f;
 	}
 
 	void addGenerator(ParticleGenerator* generator) {
 		m_generators.push_back(generator);
+	}
+
+	void addForceGenerator(ForceGenerator* forceGenerator) {
+		m_forceGenerators.push_back(forceGenerator);
 	}
 
 	void update(double dt) {
@@ -28,6 +35,9 @@ public:
 		auto it = m_particles.begin();
 		while (it != m_particles.end()) {
 			Particle* p = *it;
+			for (ForceGenerator* f : m_forceGenerators) {
+				f->updateForce(p, dt);
+			}
 			p->integrate(dt);
 			if (!p->isAlive() || isOutOfBounds(p)) {
 				delete p;
@@ -45,6 +55,7 @@ private:
 	physx::PxVec3 m_gravity;            // la misma para todas las partículas
 	physx::PxVec3 m_center;             // centro de la zona de acción
 	float m_radius;                     // radio de la zona de acción
+	std::vector<ForceGenerator*> m_forceGenerators;
 
 	bool isOutOfBounds(const Particle* p) const {
 		return (p->getPos() - m_center).magnitude() > m_radius;

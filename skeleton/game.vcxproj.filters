@@ -41,6 +41,14 @@
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="P2_Scene.h" />
     <ClInclude Include="UniformGenerator.h" />
+    <ClInclude Include="ForceGenerator.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="GravityForceGenerator.h" />
+    <ClInclude Include="P3_Scene.h" />
+    <ClInclude Include="WindForceGenerator.h" />
+    <ClInclude Include="P3_2_Scene.h" />
+    <ClInclude Include="WhirlwindForceGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

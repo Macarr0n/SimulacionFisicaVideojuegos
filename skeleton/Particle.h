@@ -20,6 +20,10 @@ public:
 	physx::PxVec3 getPos() const { return pose.p; }
 	bool isAlive() const { return lifeTime > 0.0; }
 
+	Vector3D getVel() const { return vel; }
+	float getMass() const { return mass; }
+	void addForce(const Vector3D& f) { force += f; }
+
 private:
 	Vector3D vel;
 	physx::PxTransform pose;   // el render item lee la posición de aquí
@@ -29,4 +33,5 @@ private:
 	Integrator type;
 	float mass;
 	double lifeTime;           // segundos que le quedan antes de morir
+	Vector3D force;
 };
