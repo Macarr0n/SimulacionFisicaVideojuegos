@@ -20,15 +20,18 @@
 
 #include <iostream>
 // Para las escenas del curso, se incluyen los headers de las prácticas y la escena vacía
-#include "SceneManager.h"
-#include "P0S_Scene.h"
-#include "P1S_Scene.h"
-#include "P1.2_Scene.h"
-#include "P2_Scene.h"
-#include "P3_Scene.h"
-#include "P3_2_Scene.h"
+#include "Scenes/SceneManager.h"
+#include "Scenes/EmptyScene.h"
+#include "Scenes/P0/VectorsScene.h"
+#include "Scenes/P1/ParticleScene.h"
+#include "Scenes/P1/ProjectileScene.h"
+#include "Scenes/P2/EmittersScene.h"
+#include "Scenes/P3/GravityScene.h"
+#include "Scenes/P3/WindScene.h"
+#include "Scenes/P3/WhirlwindScene.h"
+#include "Scenes/P3/ExplosionScene.h"
 
-#include "EmptyScene.h"
+#include "Scenes/EmptyScene.h"
 
 #include <foundation/PxSimpleTypes.h>
 #include <PxPhysicsVersion.h> // <- Macros for PhysX version checking
@@ -105,12 +108,14 @@ void initPhysics(bool interactive)
 	gScene = gPhysics->createScene(sceneDesc);
 	// Registrar las prácticas/escenas del curso
 	SceneManager::instance().registerScene<EmptyScene>("EscenaVacia");
-	SceneManager::instance().registerScene<P0_Scene>("EscenaP0");
-	SceneManager::instance().registerScene<P1_Scene>("EscenaP1");
-	SceneManager::instance().registerScene<P1_2_Scene>("EscenaP1.2");
-	SceneManager::instance().registerScene<P2_Scene>("EscenaP2");
-	SceneManager::instance().registerScene<P3_Scene>("EscenaP3");
-	SceneManager::instance().registerScene<P3_2_Scene>("EscenaP3.2");
+	SceneManager::instance().registerScene<VectorsScene>("EscenaP0");
+	SceneManager::instance().registerScene<ParticleScene>("EscenaP1");
+	SceneManager::instance().registerScene<ProjectileScene>("EscenaP1.2");
+	SceneManager::instance().registerScene<EmittersScene>("EscenaP2");
+	SceneManager::instance().registerScene<GravityScene>("EscenaP3");
+	SceneManager::instance().registerScene<WindScene>("EscenaP3.2");
+	SceneManager::instance().registerScene<WhirlwindScene>("EscenaP3.3");
+	SceneManager::instance().registerScene<ExplosionScene>("EscenaP3.4");
 
 	// Cargar la escena inicial
 	SceneManager::instance().changeScene("EscenaVacia");

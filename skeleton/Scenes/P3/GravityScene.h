@@ -1,13 +1,13 @@
 #pragma once
-#include "Scene.h"
-#include "ParticleSystem.h"
-#include "GaussianGenerator.h"
-#include "GravityForceGenerator.h"
+#include "Scenes/Scene.h"
+#include "Particles/ParticleSystem.h"
+#include "ParticleGenerators/GaussianGenerator.h"
+#include "ForceGenerators/GravityForceGenerator.h"
 #include <vector>
 
-class P3_Scene : public Scene {
+class GravityScene : public Scene {
 public:
-    explicit P3_Scene(std::string name) : Scene(std::move(name)) {}
+    explicit GravityScene(std::string name) : Scene(std::move(name)) {}
 
     void init() override {
         // Izquierda: gravedad como aceleración fija, como en la práctica 2

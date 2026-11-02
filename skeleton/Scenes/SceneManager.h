@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Scene.h"
+#include "Scenes/Scene.h"
 #include <memory>
 #include <unordered_map>
 #include <string>

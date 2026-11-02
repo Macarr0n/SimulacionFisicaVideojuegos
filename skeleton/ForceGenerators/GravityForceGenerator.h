@@ -1,5 +1,5 @@
 #pragma once
-#include "ForceGenerator.h"
+#include "ForceGenerators/ForceGenerator.h"
 
 // class base de todos los generadores de fuerzas
 class GravityForceGenerator : public ForceGenerator {

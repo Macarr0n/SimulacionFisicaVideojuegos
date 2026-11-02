@@ -1,12 +1,12 @@
 #pragma once
-#include "Scene.h"
-#include "ParticleSystem.h"
-#include "GaussianGenerator.h"
-#include "UniformGenerator.h"
+#include "Scenes/Scene.h"
+#include "Particles/ParticleSystem.h"
+#include "ParticleGenerators/GaussianGenerator.h"
+#include "ParticleGenerators/UniformGenerator.h"
 
-class P2_Scene : public Scene {
+class EmittersScene : public Scene {
 public:
-    explicit P2_Scene(std::string name) : Scene(std::move(name)) {}
+    explicit EmittersScene(std::string name) : Scene(std::move(name)) {}
 
     void init() override {
         m_system = new ParticleSystem(physx::PxVec3(0.f, -10.f, 0.f),   // gravedad

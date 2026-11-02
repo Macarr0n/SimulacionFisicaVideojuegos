@@ -1,17 +1,17 @@
 #pragma once
-#include "Scene.h"
+#include "Scenes/Scene.h"
 #include "RenderUtils.hpp"
 #include <array>
-#include "Vector3D.h"
-#include "Particle.h"
+#include "Math/Vector3D.h"
+#include "Particles/Particle.h"
 
-class P1_Scene :
+class ParticleScene :
     public Scene
 {
 private:
 	Particle* m_particle { nullptr };
 public:
-    explicit P1_Scene(std::string name) : Scene(std::move(name)) {}
+    explicit ParticleScene(std::string name) : Scene(std::move(name)) {}
 
     void init() override {
 		m_particle = new Particle(Vector3D(0.f, 0.f, 0.f), Vector3D(10.f, 10.f, 0.f), Vector3D(0.f, -9.8f, 0.f), 0.5f, Integrator::EULER_SEMI);

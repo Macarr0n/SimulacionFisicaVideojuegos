@@ -1,5 +1,5 @@
 #pragma once
-#include "ForceGenerator.h"
+#include "ForceGenerators/ForceGenerator.h"
 
 // viento uniforme dentro de la esfera
 class WindForceGenerator : public ForceGenerator
@@ -23,7 +23,7 @@ protected:
 	Vector3D m_windVel;
 
 	// velocidad del viento donde está la partícula (el torbellino cambiará esto)
-	Vector3D windVelAt(Particle* p) {
+	virtual Vector3D windVelAt(Particle* p) {
 		return m_windVel;
 	}
 	bool isInside(Particle* p) {

@@ -1,4 +1,4 @@
-#include "Particle.h"
+#include "Particles/Particle.h"
 #include <cmath>
 
 Particle::Particle(Vector3D Pos, Vector3D Vel, Vector3D Acc, float Damping, Integrator Type,

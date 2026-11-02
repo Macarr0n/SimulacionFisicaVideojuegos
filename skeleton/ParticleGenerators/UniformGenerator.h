@@ -1,5 +1,5 @@
 #pragma once
-#include "ParticleGenerator.h"
+#include "ParticleGenerators/ParticleGenerator.h"
 
 // distribución uniforme: todos los valores entre min y max igual de probables
 class UniformGenerator : public ParticleGenerator

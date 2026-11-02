@@ -1,14 +1,14 @@
 #pragma once
-#include "Scene.h"
+#include "Scenes/Scene.h"
 #include "RenderUtils.hpp"
-#include "Particle.h"
-#include "Proyectil.h"
+#include "Particles/Particle.h"
+#include "Particles/Proyectil.h"
 #include <vector>
 #include <iostream>
 
-class P1_2_Scene : public Scene {
+class ProjectileScene : public Scene {
 public:
-	explicit P1_2_Scene(std::string name) : Scene(std::move(name)) {}
+	explicit ProjectileScene(std::string name) : Scene(std::move(name)) {}
 
 	void init() override {
 		m_sueloTr = physx::PxTransform(physx::PxVec3(0.f, -0.5f, 0.f));

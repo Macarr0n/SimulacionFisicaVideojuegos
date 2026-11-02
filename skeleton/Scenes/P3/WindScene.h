@@ -1,13 +1,13 @@
 #pragma once
-#include "Scene.h"
-#include "ParticleSystem.h"
-#include "GaussianGenerator.h"
-#include "GravityForceGenerator.h"
-#include "WindForceGenerator.h"
+#include "Scenes/Scene.h"
+#include "Particles/ParticleSystem.h"
+#include "ParticleGenerators/GaussianGenerator.h"
+#include "ForceGenerators/GravityForceGenerator.h"
+#include "ForceGenerators/WindForceGenerator.h"
 
-class P3_2_Scene : public Scene {
+class WindScene : public Scene {
 public:
-	explicit P3_2_Scene(std::string name) : Scene(std::move(name)) {}
+	explicit WindScene(std::string name) : Scene(std::move(name)) {}
 
 	void init() override {
 		m_system = new ParticleSystem(physx::PxVec3(0.f, 0.f, 0.f), physx::PxVec3(0.f, 0.f, 0.f), 100.f);

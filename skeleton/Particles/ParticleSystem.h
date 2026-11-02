@@ -1,6 +1,6 @@
 #pragma once
-#include "ParticleGenerator.h"
-#include "ForceGenerator.h"
+#include "ParticleGenerators/ParticleGenerator.h"
+#include "ForceGenerators/ForceGenerator.h"
 
 #include <list>
 #include <vector>
@@ -25,6 +25,11 @@ public:
 
 	void addForceGenerator(ForceGenerator* forceGenerator) {
 		m_forceGenerators.push_back(forceGenerator);
+	}
+
+	// para meter partículas sueltas sin generador
+	void addParticle(Particle* p) {
+		m_particles.push_back(p);
 	}
 
 	void update(double dt) {

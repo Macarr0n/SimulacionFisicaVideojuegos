@@ -1,16 +1,16 @@
 #pragma once
-#include "Scene.h"
+#include "Scenes/Scene.h"
 #include "RenderUtils.hpp"
 #include <array>
-#include "Vector3D.h"
+#include "Math/Vector3D.h"
 
 constexpr int N_ESFERAS = 10;
 
-class P0_Scene :
+class VectorsScene :
     public Scene
 {
 public:
-    explicit P0_Scene(std::string name) : Scene(std::move(name)) {}
+    explicit VectorsScene(std::string name) : Scene(std::move(name)) {}
 
     void init() override {
         // Ejemplo: Creación de una esfera usando las utilidades de render existentes

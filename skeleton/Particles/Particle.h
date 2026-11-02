@@ -1,6 +1,5 @@
 #pragma once
-#include "Vector3D.h"
-#include "Scene.h"
+#include "Math/Vector3D.h"
 #include "RenderUtils.hpp"
 
 // cómo se mueve la partícula en cada frame

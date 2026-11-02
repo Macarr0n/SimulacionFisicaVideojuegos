@@ -10,12 +10,8 @@
     <ClCompile Include="RenderUtils.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="callbacks.cpp" />
-    <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="Vector3D.cpp" />
-    <ClCompile Include="P0S_Scene.cpp" />
-    <ClCompile Include="P1S_Scene.cpp" />
-    <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="Scenes\SceneManager.cpp" />
+    <ClCompile Include="Particles\Particle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -27,28 +23,29 @@
     </ClInclude>
     <ClInclude Include="RenderUtils.hpp" />
     <ClInclude Include="callbacks.hpp" />
-    <ClInclude Include="Scene.h" />
-    <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="EmptyScene.h" />
-    <ClInclude Include="Vector3D.h" />
-    <ClInclude Include="P0S_Scene.h" />
-    <ClInclude Include="P1S_Scene.h" />
-    <ClInclude Include="Particle.h" />
-    <ClInclude Include="Proyectil.h" />
-    <ClInclude Include="P1.2_Scene.h" />
-    <ClInclude Include="ParticleGenerator.h" />
-    <ClInclude Include="GeneradorGauss.h" />
-    <ClInclude Include="ParticleSystem.h" />
-    <ClInclude Include="P2_Scene.h" />
-    <ClInclude Include="UniformGenerator.h" />
-    <ClInclude Include="ForceGenerator.h">
+    <ClInclude Include="Scenes\Scene.h" />
+    <ClInclude Include="Scenes\SceneManager.h" />
+    <ClInclude Include="Scenes\EmptyScene.h" />
+    <ClInclude Include="Math\Vector3D.h" />
+    <ClInclude Include="Scenes\P0\VectorsScene.h" />
+    <ClInclude Include="Scenes\P1\ParticleScene.h" />
+    <ClInclude Include="Particles\Particle.h" />
+    <ClInclude Include="Particles\Proyectil.h" />
+    <ClInclude Include="Scenes\P1\ProjectileScene.h" />
+    <ClInclude Include="ParticleGenerators\ParticleGenerator.h" />
+    <ClInclude Include="Particles\ParticleSystem.h" />
+    <ClInclude Include="Scenes\P2\EmittersScene.h" />
+    <ClInclude Include="ParticleGenerators\UniformGenerator.h" />
+    <ClInclude Include="ForceGenerators\ForceGenerator.h">
       <Filter>Render</Filter>
     </ClInclude>
-    <ClInclude Include="GravityForceGenerator.h" />
-    <ClInclude Include="P3_Scene.h" />
-    <ClInclude Include="WindForceGenerator.h" />
-    <ClInclude Include="P3_2_Scene.h" />
-    <ClInclude Include="WhirlwindForceGenerator.h" />
+    <ClInclude Include="ForceGenerators\GravityForceGenerator.h" />
+    <ClInclude Include="Scenes\P3\GravityScene.h" />
+    <ClInclude Include="ForceGenerators\WindForceGenerator.h" />
+    <ClInclude Include="Scenes\P3\WindScene.h" />
+    <ClInclude Include="ForceGenerators\WhirlwindForceGenerator.h" />
+    <ClInclude Include="Scenes\P3\WhirlwindScene.h" />
+    <ClInclude Include="ForceGenerators\ExplosionForceGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
