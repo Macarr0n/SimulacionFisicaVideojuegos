@@ -14,7 +14,12 @@ public:
     explicit ParticleScene(std::string name) : Scene(std::move(name)) {}
 
     void init() override {
-		m_particle = new Particle(Vector3D(0.f, 0.f, 0.f), Vector3D(10.f, 10.f, 0.f), Vector3D(0.f, -9.8f, 0.f), 0.5f, Integrator::EULER_SEMI);
+        ParticleProperties props;
+        props.damping = 0.5f;
+        props.integrator = Integrator::EULER_SEMI;
+
+        // sale en diagonal hacia arriba y la gravedad la hace caer en parábola
+        m_particle = new Particle(Vector3D(0.f, 0.f, 0.f), Vector3D(10.f, 10.f, 0.f), Vector3D(0.f, -9.8f, 0.f), props);
     }
 
     void update(double dt) override {

@@ -7,11 +7,25 @@
 class ParticleGenerator
 {
 public:
+	ParticleGenerator(int perFrame, const ParticleProperties& props)
+		: m_perFrame(perFrame), m_props(props) {}
 	virtual ~ParticleGenerator() = default;
 
 	// mete en la lista las partículas que se crean en este frame
-	virtual void generateParticles(std::list<Particle*>& particles, const physx::PxVec3& gravity) = 0;
+	void generateParticles(std::list<Particle*>& particles, const Vector3D& gravity) {
+		for (int i = 0; i < m_perFrame; i++) {
+			particles.push_back(new Particle(randomPos(), randomVel(), gravity, m_props));
+		}
+	}
 
 protected:
+	// cada generador decide cómo saca la posición y la velocidad aleatoriasW
+	virtual Vector3D randomPos() = 0;
+	virtual Vector3D randomVel() = 0;
+
 	std::default_random_engine m_randomEngine;   // da los números aleatorios a las distribuciones
+
+private:
+	int m_perFrame = 0;				//articulas por frame
+	ParticleProperties m_props;		// masa, color, vida... de las particulas que crea
 };

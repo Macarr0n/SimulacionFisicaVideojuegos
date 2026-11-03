@@ -1,20 +1,26 @@
 #pragma once
 #include <PxPhysics.h>
+#include <cmath>
 
+// vector 3D con las operaciones básicas
 using namespace std;
 
 class Vector3D
 {
-private:
+public:
 	float x, y, z;
 
-public:
 	Vector3D() : x(0), y(0), z(0) {};
 	Vector3D(float _x, float _y, float _z) : x(_x), y(_y), z(_z) {};
 	Vector3D(physx::PxVec3 vec) : x(vec.x), y(vec.y), z(vec.z) {};
 
 	float magnitude() const {
 		return sqrt(x * x + y * y + z * z);
+	}
+
+	// la longitud al cuadrado
+	float magnitudeSquared() const {
+		return x * x + y * y + z * z;
 	}
 
 	Vector3D normalize() const {
@@ -28,13 +34,6 @@ public:
 
 	Vector3D cross(const Vector3D& v) const {
 		return Vector3D((y * v.z - z * v.y), (z * v.x - x * v.z), (x * v.y - y * v.x));
-	}
-
-	Vector3D& operator= (const Vector3D& other) {
-		x = other.x;
-		y = other.y;
-		z = other.z;
-		return *this;
 	}
 
 	Vector3D& operator+ (const Vector3D& other) const {
@@ -56,6 +55,7 @@ public:
 		return Vector3D(x, y, z);
 	}
 
+	// para pasarlo directamente a PhysX
 	operator physx::PxVec3() const {
 		return physx::PxVec3(x, y, z);
 	}

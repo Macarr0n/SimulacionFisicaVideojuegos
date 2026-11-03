@@ -8,29 +8,41 @@ enum class Integrator {
 	EULER_SEMI
 };
 
+// todo esto es lo que defina a una particula aparte de su posición, velocidad y aceleración
+struct ParticleProperties {
+	float mass = 1.f;
+	float damping = 0.99f;		// entre 0 y 1, la va frenando poco a poco
+	double lifeTime = 5.0;		// segundos de vida 
+	float radius = 1.f;
+	Vector4 color = Vector4(1.f, 1.f, 1.f, 1.f);
+	Integrator integrator = Integrator::EULER_SEMI;
+};
+
 class Particle
 {
 public:
-	Particle(Vector3D Pos, Vector3D Vel, Vector3D Acc, float Damping, Integrator Type = Integrator::EULER,
-		float Mass = 1.0f, Vector4 Color = Vector4(1.0f, 1.0f, 1.0f, 1.0f), float Radius = 1.0f, double LifeTime = 5.0);
+	Particle(Vector3D pos, Vector3D vel, Vector3D acc, const ParticleProperties& props = ParticleProperties());
 	~Particle();
 
-	void integrate(double t);
-	physx::PxVec3 getPos() const { return pose.p; }
-	bool isAlive() const { return lifeTime > 0.0; }
+	Particle(const Particle&) = delete;
+	Particle& operator=(const Particle&) = delete;
 
-	Vector3D getVel() const { return vel; }
-	float getMass() const { return mass; }
-	void addForce(const Vector3D& f) { force += f; }
+	void integrate(double t);
+	void addForce(const Vector3D& f) { m_force += f; }
+
+	Vector3D getPos() const { return m_pose.p; }
+	Vector3D getVel() const { return m_vel; }
+	float getMass() const { return m_mass; }
+	bool isAlive() const { return m_lifeTime > 0.0; }
 
 private:
-	Vector3D vel;
-	physx::PxTransform pose;   // el render item lee la posición de aquí
-	RenderItem* renderItem;
-	Vector3D acc;
-	float damping;             // entre 0 y 1, la va frenando como el rozamiento del aire
-	Integrator type;
-	float mass;
-	double lifeTime;           // segundos que le quedan antes de morir
-	Vector3D force;
+	physx::PxTransform m_pose;	// el render item lee la posición de aquí
+	RenderItem* m_renderItem;
+	Vector3D m_vel;				
+	Vector3D m_acc;				// aceleración fija
+	Vector3D m_force;			// suma de las fuerzas de este frame
+	float m_damping;            
+	float m_mass;
+	double m_lifeTime;          // segundos que le quedan antes de morir
+	Integrator m_integrator;
 };

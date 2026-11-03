@@ -5,7 +5,7 @@
 // explosión: empuja hacia fuera desde el centro y se va apagando con el tiempo
 class ExplosionForceGenerator : public ForceGenerator {
 public:
-	ExplosionForceGenerator(physx::PxVec3 center, float radius, float K, float tau)
+	ExplosionForceGenerator(Vector3D center, float radius, float K, float tau)
 		: m_center(center), m_radius(radius), m_K(K), m_tau(tau) {}
 
 	// empieza la explosión desde cero
@@ -24,18 +24,18 @@ public:
 	void updateForce(Particle* p, double dt) override {
 		if (!m_active) return;
 
-		physx::PxVec3 d = p->getPos() - m_center;
+		Vector3D d = p->getPos() - m_center;
 		float r2 = d.magnitudeSquared();
 		// fuera del radio o justo en el dentro
 		if (r2 >= m_radius * m_radius || r2 < 0.01f) return;
 
 		// F = K / r^2 * (x - xc) * e^(-t / tau)
 		float strength = m_K / r2 * std::exp(-static_cast<float>(m_time) / m_tau);
-		p->addForce(Vector3D(d * strength));
+		p->addForce(d * strength);
 	}
 
 private:
-	physx::PxVec3 m_center;
+	Vector3D m_center;
 	float m_radius;			// R
 	float m_K;				// intensidad
 	float m_tau;			// constante de tiempo

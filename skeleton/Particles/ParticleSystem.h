@@ -9,7 +9,7 @@
 class ParticleSystem
 {
 public:
-	ParticleSystem(physx::PxVec3 gravity, physx::PxVec3 center, float radius)
+	ParticleSystem(Vector3D gravity, Vector3D center, float radius)
 		: m_gravity(gravity), m_center(center), m_radius(radius) {}
 
 	// el sistema es el dueño de todo, así que lo borra él
@@ -33,6 +33,11 @@ public:
 	}
 
 	void update(double dt) {
+		// los generadores de fuerzas que cambian con el tiempo avanzan una vez por frame
+		for (ForceGenerator* f : m_forceGenerators) {
+			f->update(dt);
+		}
+
 		for (ParticleGenerator* g : m_generators) {
 			g->generateParticles(m_particles, m_gravity);
 		}
@@ -57,8 +62,8 @@ public:
 private:
 	std::vector<ParticleGenerator*> m_generators;
 	std::list<Particle*> m_particles;   // lista porque se borran del medio todo el rato
-	physx::PxVec3 m_gravity;            // la misma para todas las partículas
-	physx::PxVec3 m_center;             // centro de la zona de acción
+	Vector3D m_gravity;            // la misma para todas las partículas
+	Vector3D m_center;             // centro de la zona de acción
 	float m_radius;                     // radio de la zona de acción
 	std::vector<ForceGenerator*> m_forceGenerators;
 

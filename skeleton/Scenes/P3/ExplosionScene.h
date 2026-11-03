@@ -9,30 +9,34 @@ public:
 
     void init() override {
         // sin gravedad, para que las partículas esperen quietas a la explosión
-        m_system = new ParticleSystem(physx::PxVec3(0.f, 0.f, 0.f), physx::PxVec3(0.f, 10.f, 0.f), 100.f);
+        m_system = new ParticleSystem(Vector3D(), Vector3D(0.f, 10.f, 0.f), 100.f);
 
         // el sistema se queda la explosión y la borra; aquí solo guardamos el puntero para activarla
-        m_explosion = new ExplosionForceGenerator(physx::PxVec3(0.f, 10.f, 0.f), 30.f, 1000.f, 0.1f);
+        m_explosion = new ExplosionForceGenerator(Vector3D(0.f, 10.f, 0.f), 30.f, 1000.f, 0.5f);
         m_system->addForceGenerator(m_explosion);
+
+        const float spacing = 1.f;   // distancia entre partícula y partícula
 
         // cubo de 6x6x6 partículas alrededor del centro, alternando ligeras y pesadas
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
                 for (int k = 0; k < 6; k++) {
-                    Vector3D pos((i - 2.5f) * 3.f, 10.f + (j - 2.5f) * 3.f, (k - 2.5f) * 3.f);
+                    Vector3D pos((i - 2.5f) * spacing, 10.f + (j - 2.5f) * spacing, (k - 2.5f) * spacing);
 
                     // por defecto ligeras y amarillas
-                    float mass = 1.f;
-                    Vector4 color(1.f, 1.f, 0.f, 1.f);
+                    ParticleProperties props;
+                    props.mass = 1.f;
+                    props.color = Vector4(1.f, 1.f, 0.f, 1.f);
+                    props.radius = 0.3f;
+                    props.lifeTime = 1000.0;   // no mueren mientras esperan
 
                     // y una sí y otra no, pesadas y rojas (como un tablero de ajedrez)
                     if ((i + j + k) % 2 == 0) {
-                        mass = 5.f;
-                        color = Vector4(1.f, 0.f, 0.f, 1.f);
+                        props.mass = 5.f;
+                        props.color = Vector4(1.f, 0.f, 0.f, 1.f);
                     }
 
-                    m_system->addParticle(new Particle(pos, Vector3D(), Vector3D(), 0.99f, Integrator::EULER_SEMI,
-                        mass, color, 0.3f, 1000.0));
+                    m_system->addParticle(new Particle(pos, Vector3D(), Vector3D(), props));
                 }
             }
         }
