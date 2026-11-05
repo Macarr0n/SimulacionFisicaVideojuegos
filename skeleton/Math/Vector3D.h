@@ -36,15 +36,15 @@ public:
 		return Vector3D((y * v.z - z * v.y), (z * v.x - x * v.z), (x * v.y - y * v.x));
 	}
 
-	Vector3D& operator+ (const Vector3D& other) const {
+	Vector3D operator+ (const Vector3D& other) const {
 		return Vector3D(x + other.x, y + other.y, z + other.z);
 	}
 
-	Vector3D& operator- (const Vector3D& other) const {
+	Vector3D operator- (const Vector3D& other) const {
 		return Vector3D(x - other.x, y - other.y, z - other.z);
 	}
 
-	Vector3D& operator* (float op) const {
+	Vector3D operator* (float op) const {
 		return Vector3D(x * op, y * op, z * op);
 	}
 
@@ -52,7 +52,7 @@ public:
 		x += other.x;
 		y += other.y;
 		z += other.z;
-		return Vector3D(x, y, z);
+		return *this;
 	}
 
 	// para pasarlo directamente a PhysX

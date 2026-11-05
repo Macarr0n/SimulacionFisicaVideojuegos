@@ -1,19 +1,23 @@
 #pragma once
-#include "Scenes/Scene.h"
-#include "Particles/ParticleSystem.h"
+#include "Scenes/PhysicsScene.h"
 #include "ForceGenerators/ExplosionForceGenerator.h"
 
-class ExplosionScene : public Scene {
+class ExplosionScene : public PhysicsScene {
 public:
-    explicit ExplosionScene(std::string name) : Scene(std::move(name)) {}
+    explicit ExplosionScene(std::string name) : PhysicsScene(std::move(name)) {}
 
     void init() override {
-        // sin gravedad, para que las partículas esperen quietas a la explosión
-        m_system = new ParticleSystem(Vector3D(), Vector3D(0.f, 10.f, 0.f), 100.f);
+       // el sistema se queda la explosión y la borra; aquí solo guardamos el puntero para activarla
+       m_explosion = new ExplosionForceGenerator(Vector3D(0.f, 10.f, 0.f), 30.f, 1000.f, 0.5f);
+       addForce(m_explosion);
 
-        // el sistema se queda la explosión y la borra; aquí solo guardamos el puntero para activarla
-        m_explosion = new ExplosionForceGenerator(Vector3D(0.f, 10.f, 0.f), 30.f, 1000.f, 0.5f);
-        m_system->addForceGenerator(m_explosion);
+       // dos sistemas sin gravedad que comparten la misma explosión
+       ParticleSystem* light = new ParticleSystem(Vector3D(), Vector3D(0.f, 10.f, 0.f), 100.f);
+       ParticleSystem* heavy = new ParticleSystem(Vector3D(), Vector3D(0.f, 10.f, 0.f), 100.f);
+       light->addForceGenerator(m_explosion);
+       heavy->addForceGenerator(m_explosion);
+       addSystem(light);
+       addSystem(heavy);
 
         const float spacing = 1.f;   // distancia entre partícula y partícula
 
@@ -25,8 +29,6 @@ public:
 
                     // por defecto ligeras y amarillas
                     ParticleProperties props;
-                    props.mass = 1.f;
-                    props.color = Vector4(1.f, 1.f, 0.f, 1.f);
                     props.radius = 0.3f;
                     props.lifeTime = 1000.0;   // no mueren mientras esperan
 
@@ -34,16 +36,17 @@ public:
                     if ((i + j + k) % 2 == 0) {
                         props.mass = 5.f;
                         props.color = Vector4(1.f, 0.f, 0.f, 1.f);
+                        heavy->addParticle(new Particle(pos, Vector3D(), Vector3D(), props));
                     }
-
-                    m_system->addParticle(new Particle(pos, Vector3D(), Vector3D(), props));
+                    // y ligeras y amarillas al ligero
+                    else {
+                        props.mass = 1.f;
+                        props.color = Vector4(1.f, 1.f, 0.f, 1.f);
+                        light->addParticle(new Particle(pos, Vector3D(), Vector3D(), props));
+                    }
                 }
             }
         }
-    }
-
-    void update(double dt) override {
-        m_system->update(dt);
     }
 
     void keyPress(unsigned char key, const physx::PxTransform& camera) override {
@@ -52,13 +55,7 @@ public:
         }
     }
 
-    void cleanup() override {
-        delete m_system;          // también borra la explosión
-        m_system = nullptr;
-        m_explosion = nullptr;
-    }
-
 private:
-    ParticleSystem* m_system{ nullptr };
+    // la escena la borra en cleanup, aquí solo se guarda para poder hacerla explotar
     ExplosionForceGenerator* m_explosion{ nullptr };
 };

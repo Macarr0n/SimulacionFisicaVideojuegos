@@ -30,6 +30,7 @@
 #include "Scenes/P3/WindScene.h"
 #include "Scenes/P3/WhirlwindScene.h"
 #include "Scenes/P3/ExplosionScene.h"
+#include "Scenes/Game/GooScene.h"
 
 #include "Scenes/EmptyScene.h"
 
@@ -116,6 +117,7 @@ void initPhysics(bool interactive)
 	SceneManager::instance().registerScene<WindScene>("EscenaP3.2");
 	SceneManager::instance().registerScene<WhirlwindScene>("EscenaP3.3");
 	SceneManager::instance().registerScene<ExplosionScene>("EscenaP3.4");
+	SceneManager::instance().registerScene<GooScene>("Juego");
 
 	// Cargar la escena inicial
 	SceneManager::instance().changeScene("EscenaVacia");

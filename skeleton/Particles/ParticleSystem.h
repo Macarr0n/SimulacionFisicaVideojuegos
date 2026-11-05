@@ -4,6 +4,7 @@
 
 #include <list>
 #include <vector>
+#include <algorithm>
 
 // guarda los generadores y las partículas: las crea, las mueve y las borra
 class ParticleSystem
@@ -12,11 +13,11 @@ public:
 	ParticleSystem(Vector3D gravity, Vector3D center, float radius)
 		: m_gravity(gravity), m_center(center), m_radius(radius) {}
 
-	// el sistema es el dueño de todo, así que lo borra él
+	// borra sus partículas y sus generadores de partículas
+	// los generadores de fuerzas no son suyos
 	~ParticleSystem() {
 		for (Particle* p : m_particles) delete p;
 		for (ParticleGenerator* g : m_generators) delete g;
-		for (ForceGenerator* f : m_forceGenerators) delete f;
 	}
 
 	void addGenerator(ParticleGenerator* generator) {
@@ -27,27 +28,43 @@ public:
 		m_forceGenerators.push_back(forceGenerator);
 	}
 
+	// deja de afectarle, pero no la borra, puede seguir en otros sistemas
+	void removeForceGenerator(ForceGenerator* forceGenerator) {
+		auto it = std::find(m_forceGenerators.begin(), m_forceGenerators.end(), forceGenerator);
+		if (it != m_forceGenerators.end()) {
+			m_forceGenerators.erase(it);
+		}
+	}
+
+	// enciende y apaga el generador número index
+	// devuelve true si se ha quedado encendido
+	bool toggleGenerator(int index) {
+		ParticleGenerator* g = m_generators[index];
+		g->setActive(!g->isActive());
+		return g->isActive();
+	}
+
 	// para meter partículas sueltas sin generador
 	void addParticle(Particle* p) {
 		m_particles.push_back(p);
 	}
 
 	void update(double dt) {
-		// los generadores de fuerzas que cambian con el tiempo avanzan una vez por frame
-		for (ForceGenerator* f : m_forceGenerators) {
-			f->update(dt);
-		}
-
 		for (ParticleGenerator* g : m_generators) {
-			g->generateParticles(m_particles, m_gravity);
+			if (g->isActive()) {
+				g->generateParticles(m_particles, m_gravity);
+			}
 		}
 
+		// primero todas calculan sus fuerzas con las posiciones de este frame
+		for (Particle* p : m_particles) {
+			p->applyForces(m_forceGenerators, dt);
+		}
+
+		// luego se mueven todas
 		auto it = m_particles.begin();
 		while (it != m_particles.end()) {
 			Particle* p = *it;
-			for (ForceGenerator* f : m_forceGenerators) {
-				f->updateForce(p, dt);
-			}
 			p->integrate(dt);
 			if (!p->isAlive() || isOutOfBounds(p)) {
 				delete p;

@@ -11,4 +11,11 @@ public:
 
 	// una vez por frame, para los que cambian con el tiempo (la explosión)
 	virtual void update(double dt) {}
+
+	// apagado no hace nada
+	bool isActive() const { return m_active; }
+	void setActive(bool active) { m_active = active; }
+
+private:
+	bool m_active = true;
 };

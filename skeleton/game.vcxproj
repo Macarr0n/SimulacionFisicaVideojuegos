@@ -272,10 +272,15 @@
   <ItemGroup>
     <ClInclude Include="callbacks.hpp" />
     <ClInclude Include="core.hpp" />
+    <ClInclude Include="ForceGenerators\AnchoredSpringForceGenerator.h" />
+    <ClInclude Include="ForceGenerators\GroundForceGenerator.h" />
+    <ClInclude Include="ForceGenerators\SpringForceGenerator.h" />
     <ClInclude Include="Scenes\EmptyScene.h" />
     <ClInclude Include="ForceGenerators\ExplosionForceGenerator.h" />
     <ClInclude Include="ForceGenerators\ForceGenerator.h" />
     <ClInclude Include="ForceGenerators\GravityForceGenerator.h" />
+    <ClInclude Include="Scenes\Game\GooScene.h" />
+    <ClInclude Include="Scenes\Game\Strand.h" />
     <ClInclude Include="Scenes\P0\VectorsScene.h" />
     <ClInclude Include="Scenes\P1\ProjectileScene.h" />
     <ClInclude Include="Scenes\P1\ParticleScene.h" />
@@ -287,10 +292,11 @@
     <ClInclude Include="ParticleGenerators\ParticleGenerator.h" />
     <ClInclude Include="Particles\ParticleSystem.h" />
     <ClInclude Include="ParticleGenerators\UniformGenerator.h" />
-    <ClInclude Include="Particles\Proyectil.h" />
+    <ClInclude Include="Particles\Projectile.h" />
     <ClInclude Include="RenderUtils.hpp" />
     <ClInclude Include="Render\Camera.h" />
     <ClInclude Include="Render\Render.h" />
+    <ClInclude Include="Scenes\PhysicsScene.h" />
     <ClInclude Include="Scenes\Scene.h" />
     <ClInclude Include="Scenes\SceneManager.h" />
     <ClInclude Include="Math\Vector3D.h" />

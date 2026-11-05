@@ -51,11 +51,26 @@ public:
             Vector3D(0.f, 5.f, 0.f),      // sube un poco para que la gravedad la devuelva a la misma altura
             Vector3D(1.f, 1.f, 1.f),      // desviación de la velocidad, pequeña
             3,                            // partículas por frame
-            fog));                            
+            fog));
     }
 
     void update(double dt) override {
         m_system->update(dt);
+    }
+
+    // Z agus, X lluvia, C niebla, el núnero es el orden en el que se añadieron
+    void keyPress(unsigned char key, const physx::PxTransform& camera) override {
+        switch (key) {
+        case 'z':case'Z':
+            printState("Agua", m_system->toggleGenerator(0));
+            break;
+        case 'x': case 'X':
+            printState("Lluvia", m_system->toggleGenerator(1));
+            break;
+        case 'c': case 'C':
+            printState("Niebla", m_system->toggleGenerator(2));
+            break;
+        }
     }
 
     void cleanup() override {
@@ -65,4 +80,8 @@ public:
 
 private:
     ParticleSystem* m_system{ nullptr };
+    void printState(const std::string& name, bool active) {
+        if (active) std::cout << name << ": ON\n";
+        else std::cout << name << ": OFF\n";
+    }
 };

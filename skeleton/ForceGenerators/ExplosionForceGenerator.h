@@ -10,19 +10,19 @@ public:
 
 	// empieza la explosión desde cero
 	void explode() {
-		m_active = true;
+		m_exploding = true;
 		m_time = 0.0;
 	}
 
 	void update(double dt) override {
-		if (!m_active) return;
+		if (!m_exploding) return;
 		m_time += dt;
 		// a partir de 4 tau ya casi no hace nada, así que se apaga
-		if (m_time > 4.0 * m_tau) m_active = false;
+		if (m_time > 4.0 * m_tau) m_exploding = false;
 	}
 
 	void updateForce(Particle* p, double dt) override {
-		if (!m_active) return;
+		if (!m_exploding) return;
 
 		Vector3D d = p->getPos() - m_center;
 		float r2 = d.magnitudeSquared();
@@ -40,5 +40,5 @@ private:
 	float m_K;				// intensidad
 	float m_tau;			// constante de tiempo
 	double m_time = 0.0;	// tiempo desde que explotó
-	bool m_active = false;	
+	bool m_exploding = false;	
 };

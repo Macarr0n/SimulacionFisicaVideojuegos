@@ -30,7 +30,7 @@
     <ClInclude Include="Scenes\P0\VectorsScene.h" />
     <ClInclude Include="Scenes\P1\ParticleScene.h" />
     <ClInclude Include="Particles\Particle.h" />
-    <ClInclude Include="Particles\Proyectil.h" />
+    <ClInclude Include="Particles\Projectile.h" />
     <ClInclude Include="Scenes\P1\ProjectileScene.h" />
     <ClInclude Include="ParticleGenerators\ParticleGenerator.h" />
     <ClInclude Include="Particles\ParticleSystem.h" />
@@ -46,6 +46,12 @@
     <ClInclude Include="ForceGenerators\WhirlwindForceGenerator.h" />
     <ClInclude Include="Scenes\P3\WhirlwindScene.h" />
     <ClInclude Include="ForceGenerators\ExplosionForceGenerator.h" />
+    <ClInclude Include="Scenes\PhysicsScene.h" />
+    <ClInclude Include="ForceGenerators\SpringForceGenerator.h" />
+    <ClInclude Include="ForceGenerators\GroundForceGenerator.h" />
+    <ClInclude Include="Scenes\Game\GooScene.h" />
+    <ClInclude Include="ForceGenerators\AnchoredSpringForceGenerator.h" />
+    <ClInclude Include="Scenes\Game\Strand.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
